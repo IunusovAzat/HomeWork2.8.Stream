@@ -5,10 +5,12 @@ import com.example.homeworkstreamaandoption.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RequestMapping("/employee")
+@RestController
 public class EmployeesController {
     private final EmployeeService employeeService;
 
@@ -32,7 +34,7 @@ public class EmployeesController {
     }
 
     @GetMapping(path = "/remove")
-    public Object removeEmployee(
+    public String removeEmployee(
             @RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName) {
         Employee employee = null;
@@ -41,11 +43,11 @@ public class EmployeesController {
         } catch (Throwable e) {
             return e.getMessage();
         }
-        return employee;
+        return String.valueOf(employee);
     }
 
     @GetMapping(path = "/find")
-    public Object findEmployee(
+    public String findEmployee(
             @RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName) {
         Employee employee = null;
@@ -54,54 +56,7 @@ public class EmployeesController {
         } catch (Throwable e) {
             return e.getMessage();
         }
-        return employee;
-    }
-
-    @GetMapping(path = "/departments/max-salary")
-    public Object getHighestPaidEmployee(
-            @RequestParam(value = "departmentId") int departmentId) {
-        Employee employee = null;
-        try {
-            employee = employeeService.getHighestPaidEmployee(departmentId);
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
-        return employee;
-    }
-
-    @GetMapping(path = "/departments/min-salary")
-    public Object getLowestPaidEmployee(
-            @RequestParam(value = "departmentId") int departmentId) {
-        Employee employee = null;
-        try {
-            employee = employeeService.getLowestPaidEmployee(departmentId);
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
-        return employee;
-    }
-
-    @GetMapping(path = "/departments/all", params = "departmentId")
-    public Object printEmployeesForDepartment(
-            @RequestParam(value = "departmentId") int departmentId) {
-        List<Employee> employees = null;
-        try {
-            employees = employeeService.printEmployeesForDepartment(departmentId);
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
-        return employees;
-    }
-
-    @GetMapping(path = "/departments/all")
-    public Object printEmployeesByDepartments() {
-        List<Employee> employees = null;
-        try {
-            employees = employeeService.printEmployeesByDepartments();
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
-        return employees;
+        return String.valueOf(employee);
     }
 
     @GetMapping(path = "/print")

@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeeServiceImp implements EmployeeService {
+public abstract class EmployeeServiceImp implements EmployeeService {
     private final List<Employee> employees;
     private final String ERR_EMPL_ALREADY_ADDED = "Сотрудник уже имеется в массиве";
     private final String ERR_EMPL_NOT_FOUND = "Сотрудник не найден";
@@ -20,7 +20,7 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName, int salary, int department) {
+    public Employee addEmployee(String firstName, String lastName, int salary, Integer department) {
         Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.contains(employee)) {
             throw new RuntimeException(ERR_EMPL_ALREADY_ADDED);
@@ -45,43 +45,13 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public Employee getLowestPaidEmployee(int department) {
-        return employees.stream()
-                .filter(e -> e.getDepartment() == department)
-                .min(Comparator.comparingInt(e -> e.getSalary()))
-                .orElseThrow(() -> new RuntimeException(ERR_EMPL_NOT_FOUND));
-    }
-
-    @Override
-    public Employee getHighestPaidEmployee(int department) {
-        return employees.stream()
-                .filter(e -> e.getDepartment() == department)
-                .max(Comparator.comparingInt(e -> e.getSalary()))
-                .orElseThrow(() -> new RuntimeException(ERR_EMPL_NOT_FOUND));
-    }
-
-    @Override
-    public List<Employee> printEmployeesForDepartment(int department) {
-        return employees.stream()
-                .filter(e -> e.getDepartment() == department)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Employee> printEmployeesByDepartments() {
-        return Collections.unmodifiableList(employees.stream()
-                .sorted(Comparator.comparingInt(e -> e.getDepartment()))
-                .collect(Collectors.toList()));
-    }
-
-    @Override
     public List<Employee> printEmployees() {
         return Collections.unmodifiableList(employees);
     }
 
     @Override
     public List<Employee> fillEmployeesList() {
-        employees.add(new Employee("Maria", "Sharapova", 80_000, 2));
+        employees.add(new Employee("Maria", "Sharapova", 8_000, 2));
         employees.add(new Employee("Vasya", "Pupkin", 10_000, 1));
         employees.add(new Employee("Oleg", "Ivanov", 20_000, 1));
         employees.add(new Employee("Rafa", "Nadal", 100_000, 2));

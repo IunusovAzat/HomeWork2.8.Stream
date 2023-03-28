@@ -5,11 +5,11 @@ import com.example.homeworkstreamaandoption.model.Employee;
 import java.util.List;
 
 public interface DepartmentService {
-    Employee getLowestPaidEmployee(int department);
+    Employee getLowestPaidEmployee(Integer department);
 
-    Employee getHighestPaidEmployee(int department);
+    Employee getHighestPaidEmployee(Integer department);
 
-    List<Employee> printEmployeesForDepartment(int department);
+    List<Employee> printEmployeesForDepartment(Integer department);
 
     List<Employee> printEmployeesByDepartments();
 }

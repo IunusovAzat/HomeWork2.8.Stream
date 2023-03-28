@@ -19,49 +19,49 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/max-salary")
-    public Object getHighestPaidEmployee(
-            @RequestParam(value = "departmentId") int departmentId) {
-        Employee employee = null;
+    public String getHighestPaidEmployee(
+            @RequestParam(value = "departmentId") Integer departmentId) {
+        Employee employee;
         try {
             employee = departmentService.getHighestPaidEmployee(departmentId);
         } catch (Throwable e) {
             return e.getMessage();
         }
-        return employee;
+        return String.valueOf(employee);
     }
 
     @GetMapping(path = "/min-salary")
-    public Object getLowestPaidEmployee(
-            @RequestParam(value = "departmentId") int departmentId) {
-        Employee employee = null;
+    public String getLowestPaidEmployee(
+            @RequestParam(value = "departmentId") Integer departmentId) {
+        Employee employee;
         try {
             employee = departmentService.getLowestPaidEmployee(departmentId);
         } catch (Throwable e) {
             return e.getMessage();
         }
-        return employee;
+        return String.valueOf(employee);
     }
 
     @GetMapping(path = "/all", params = "departmentId")
-    public Object printEmployeesForDepartment(
-            @RequestParam(value = "departmentId") int departmentId) {
-        List<Employee> employees = null;
+    public String printEmployeesForDepartment(
+            @RequestParam(value = "departmentId") Integer departmentId) {
+        List<Employee> employees;
         try {
             employees = departmentService.printEmployeesForDepartment(departmentId);
         } catch (Throwable e) {
             return e.getMessage();
         }
-        return employees;
+        return String.valueOf(employees);
     }
 
     @GetMapping(path = "/all")
-    public Object printEmployeesByDepartments() {
-        List<Employee> employees = null;
+    public String printEmployeesByDepartments() {
+        List<Employee> employees;
         try {
             employees = departmentService.printEmployeesByDepartments();
         } catch (Throwable e) {
             return e.getMessage();
         }
-        return employees;
+        return String.valueOf(employees);
     }
 }
