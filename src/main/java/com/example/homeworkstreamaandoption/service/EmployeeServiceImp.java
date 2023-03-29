@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public abstract class EmployeeServiceImp implements EmployeeService {
+public class EmployeeServiceImp implements EmployeeService {
     private final List<Employee> employees;
     private final String ERR_EMPL_ALREADY_ADDED = "Сотрудник уже имеется в массиве";
     private final String ERR_EMPL_NOT_FOUND = "Сотрудник не найден";
@@ -42,6 +42,26 @@ public abstract class EmployeeServiceImp implements EmployeeService {
                 .filter(e -> e.getFirstName().equals(firstName) && e.getLastName().equals(lastName))
                 .findAny();
         return employee.orElseThrow(() -> new RuntimeException(ERR_EMPL_NOT_FOUND));
+    }
+
+    @Override
+    public Employee getLowestPaidEmployee(Integer department) {
+        return null;
+    }
+
+    @Override
+    public Employee getHighestPaidEmployee(Integer department) {
+        return null;
+    }
+
+    @Override
+    public List<Employee> printEmployeesForDepartment(Integer department) {
+        return null;
+    }
+
+    @Override
+    public List<Employee> printEmployeesByDepartments() {
+        return null;
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
-public abstract class DepartmentServiceImpl implements DepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
     private final EmployeeService employeeService;
 
     public DepartmentServiceImpl(EmployeeService employeeService) {
